@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="content">
+    <!-- Begin Page Content -->
+    <div   class="container-fluid">
+
+        <!-- Page Heading -->
+        !-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">자유게시판</h1>
+        <h6 class="mb-4 font-weight-bold text-primary">자유롭게 글을 쓸수 있는 공간입니다!</h6>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="form-row float-right card-header py-3">
+                <div class ="container"></div>
+
+                <!-- Topbar Search -->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                      th:action="@{/user/board/search/{type_nm}(type_nm=${type})}">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." th:name="search_value"
+                               aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="card-body">
+                <div class="table">
+                    <table class="table" width="100%" cellspacing="0" >
+                        <thead>
+                        <tr class="header">
+                            <th width="5%">번호</th>
+                            <th width="20%">작성자</th>
+                            <th width="45%">게시글</th>
+                            <th width="5%">조회수</th>
+                            <th width="15%">날짜</th>
+                            <th width="5%">추천</th>
+                            <th width="5%">비추</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="board : ${list}">
+                            <td th:text="${board.num}">num</td>
+                            <td th:text="${board.email}">email</td>
+                            <td >
+                                <a th:href= "@{/user/board/view/{num_id}/{type_id}(num_id=${board.num},type_id= ${board.type})}" th:text="${board.title}">title</a>
+                            </td>
+                            <td th:text="${board.views}">views</td>
+                            <td th:size="13" th:text="${#temporals.format(board.writeryear , 'yyyy-MM-dd HH:mm')}">writeyear</td>
+                            <td th:text="${board.like}">like</td>
+                            <td th:text="${board.bad}">bad</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <form th:action="@{/user/write/{type_nm}(type_nm=${type})}">
+            <button type="submit" class="btn btn-primary">글쓰기</button>
+        </form>
+
+        <div class="center-block">
+        <nav style="text-align: center;">
+            <!--표에 사용될 변수값 초기화 -->
+            <ul class="pagination"
+                th:with="start=${T(Math).floor(list.number/10)*10 + 1},
+                    last=(${start + 9 < list.totalPages ? start + 9 : list.totalPages})">
+                  <th:block th:with="
+                firstAddr=@{/user/freeboard(page=1)},
+                prevAddr=@{/user/freeboard(page=${list.number})},
+                nextAddr=@{/user/freeboard(page=${list.number + 2})},
+                lastAddr=@{/user/freeboard(page=${list.totalPages})}">
+                    <li class="page-item">
+                        <a th:href="${firstAddr}" aria-label="First" class="page-link">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+                    <!-- 이전 페이지로 가기 버튼 -->
+                    <li th:class="${list.first} ? 'disabled'" class="page-item">
+                        <a th:href="${list.first} ? '#' :${prevAddr}" class="page-link"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+                    <!--1,2,3,4,.. 등 페이지-->
+                    <li th:each="page: ${#numbers.sequence(start, last)}" class="page-item"
+                        th:class="${page == list.number + 1} ? 'active'">
+                        <a th:text="${page}" th:href="@{/user/freeboard(page=${page})}" class="page-link"></a>
+                    </li>
+                    <!--다음 페이지로 -->
+                    <li th:class="${list.last} ? 'disabled'" class="page-item">
+                        <a th:href="${list.last} ? '#' : ${nextAddr}" class="page-link"
+                           aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                    <!--맨 마지막 페이지로 이동 -->
+                    <li class="page-item">
+                        <a th:href="${lastAddr}" aria-label="Last" class="page-link">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                </th:block>
+            </ul>
+        </nav>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+</th:block>
+</html>

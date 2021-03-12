@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="content">
+    <div class="container-fluid">
+
+        <!--- \\\\\\\Post-->
+        <div class="card gedf-card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-2">
+                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        </div>
+                        <div class="ml-2">
+                            <div class="h5 m-0"><h6 type="text" th:value="${boardDto.email}"
+                                                    th:text="${boardDto.email}"></h6></div>
+                            <div class="h7 text-muted">Miracles Lee Cross</div>
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                <div class="h6 dropdown-header">Configuration</div>
+                                <a class="dropdown-item" href="#">Save</a>
+                                <a class="dropdown-item" href="#">Hide</a>
+                                <a class="dropdown-item" href="#">Report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i>10 min ago</div>
+                <h6 type="h7 text-muted" th:value="${boardDto.writeryear}" th:text="${#temporals.format(boardDto.writeryear , 'yyyy-MM-dd HH:mm')}"></h6>
+                <h6 type="h7 text-muted" th:value="${boardDto.views}" th:text="${boardDto.views}"></h6>
+
+
+                <a class="card-link" href="#">
+                    <h5 class="card-title" id="title" type="text" th:name="title" th:text="${boardDto.title}"></h5>
+                </a>
+
+                <p class="card-text" id="content" th:name="content" th:value="${boardDto.content}"
+                   th:text="${boardDto.content}">
+                </p>
+            </div>
+            <div class="card-footer">
+                <div class="col-xs-12">
+                    <div class="row">
+                    <div class="col-xs-4">
+
+                        <form th:action="@{/user/board/update/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                              method="POST">
+                            <button type="submit" class="btn-sm btn-primary"><i class="fa fa-list"></i> 목록</button>
+                        </form>
+                    </div>
+                    <div th:if="${boardDto.email.toString().equals(#authentication.getName())}" class="col-xs-4">
+
+                        <form th:action="@{/user/board/update/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                              method="POST">
+                            <button type="submit" class="btn-sm btn-primary"><i class="fa fa-save"></i> 수정</button>
+                        </form>
+                    </div>
+                    <div th:if="${boardDto.email.toString().equals(#authentication.getName())}" class="col-xs-4">
+
+                        <form th:action="@{/user/board/delete/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                              method="POST">
+                            <button type="submit" class="btn-sm btn-primary"><i class="fa fa-trash"></i> 삭제</button>
+                        </form>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body leftcontainer">
+            <div class="row">
+                <div class="col-12">
+                    <div class="comments">
+                        <div class="comments-details">
+                            <span class="total-comments comments-sort" th:text="${commendcount}" th:value="${commendcount}"></span>개의 댓글을 남겼습니다!
+                            <div class="comment-box add-comment">
+                            <span class="commenter-pic">
+                                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-fluid">
+                            </span>
+
+                                <span class="commenter-name">
+                                       <form th:action="@{/user/board/view/{num_id}/{type_id}/comment/(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                                             method="POST">
+                                <input type="text" placeholder="댓글을 남겨주세요." th:name="comment" th:size="30">
+                                   <button type="submit" class="btn btn-default">답글 달기</button>
+                                </form>
+                            </span>
+                            </div>
+
+
+                            <div class="comment-box" th:each="comment : ${commendlist}">
+                            <span class="commenter-pic">
+                                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-fluid">
+                            </span>
+                                <span class="commenter-name">
+                                <span class="comment-time" th:text="${#temporals.format(comment.writeryear , 'yyyy-MM-dd HH:mm')}"></span>
+                            </span>
+                                <p class="comment-txt more" th:text="${comment.comment}"></p>
+                                <div class="comment-meta">
+                                     <form th:action="@{/user/board/view/{num_id}/{type_id}/{comment_id}/comment/like/(num_id=${boardDto.num},type_id= ${boardDto.type},comment_id= ${comment.commentnum})}"
+                                          method="POST">
+                                    <button class="comment-like" type="submit" ><i class="fa fa-thumbs-up" th:name=like
+                                                                  th:text="${comment.like}"></i></button>
+                                        </form>
+                                    <form th:action="@{/user/board/view/{num_id}/{type_id}/{comment_id}/comment/bed/(num_id=${boardDto.num},type_id= ${boardDto.type},comment_id= ${comment.commentnum})}"
+                                          method="POST">
+                                    <button class="comment-dislike"><i class="fa fa-thumbs-down" aria-hidden="true"
+                                                                       th:text="${comment.bad}"></i></button>
+                                    </form>
+                                    <button class="comment-reply reply-popup"><i class="fa fa-reply-all"
+                                                                                 aria-hidden="true"></i>답글 달기
+                                    </button>
+                                </div>
+                                <div class="comment-box add-comment reply-box">
+                                <span class="commenter-pic">
+                                    <img src="/images/user-icon.jpg" class="img-fluid">
+                                </span>
+                                    <span class="commenter-name">
+                                    <input type="text" placeholder="Add a public reply" name="Add Comment">
+                                    <button type="submit" class="btn btn-default">Reply</button>
+                                    <button type="cancel" class="btn btn-default reply-popup">Cancel</button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 -align-center">
+                    <nav style="text-align: center;">
+                        <!--표에 사용될 변수값 초기화 -->
+                        <ul class="pagination"
+                            th:with="start=${T(Math).floor(commendlist.number/10)*10 + 1},
+                    last=(${start + 9 < commendlist.totalPages ? start + 9 : commendlist.totalPages})">
+                            <th:block th:with="
+                firstAddr=@{/user/board/view/{num_id}/{type_id}(page=1)(num_id=${boardDto.num},type_id= ${boardDto.type})},
+                prevAddr=@{/user/board/view/{num_id}/{type_id}(page=${commendlist.number},num_id=${boardDto.num},type_id= ${boardDto.type})},
+                nextAddr=@{/user/board/view/{num_id}/{type_id}(page=${commendlist.number + 2},num_id=${boardDto.num},type_id= ${boardDto.type})},
+                lastAddr=@{/user/board/view/{num_id}/{type_id}(page=${commendlist.totalPages},num_id=${boardDto.num},type_id= ${boardDto.type})}">
+                                <li class="page-item">
+                                    <a th:href="${firstAddr}" aria-label="First" class="page-link">
+                                        <span aria-hidden="true">First</span>
+                                    </a>
+                                </li>
+                                <!-- 이전 페이지로 가기 버튼 -->
+                                <li th:class="${commendlist.first} ? 'disabled'" class="page-item">
+                                    <a th:href="${commendlist.first} ? '#' :${prevAddr}" class="page-link"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                    </a>
+                                </li>
+                                <!--1,2,3,4,.. 등 페이지-->
+                                <li th:each="page: ${#numbers.sequence(start, last)}" class="page-item"
+                                    th:class="${page == commendlist.number + 1} ? 'active'">
+                                    <a th:text="${page}" th:href="@{/user/board/view/{num_id}/{type_id}(page=${page},num_id=${boardDto.num},type_id= ${boardDto.type})}" class="page-link"></a>
+                                </li>
+                                <!--다음 페이지로 -->
+                                <li th:class="${commendlist.last} ? 'disabled'" class="page-item">
+                                    <a th:href="${commendlist.last} ? '#' : ${nextAddr}" class="page-link"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&gt;</span>
+                                    </a>
+                                </li>
+                                <!--맨 마지막 페이지로 이동 -->
+                                <li class="page-item">
+                                    <a th:href="${lastAddr}" aria-label="Last" class="page-link">
+                                        <span aria-hidden="true">Last</span>
+                                    </a>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+
+            <style>
+                .comments-details button.btn.dropdown-toggle,
+                .comments-details .total-comments {
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: #5e5e5e;
+                }
+
+                .comments-details {
+                    padding: 15px 15px;
+                }
+
+                .comments .comments .dropdown,
+                .comments .dropup {
+                    position: relative;
+                }
+
+                .comments button {
+                    background-color: transparent;
+                    border: none;
+                }
+
+                .comments .comment-box {
+                    width: 100%;
+                    float: left;
+                    height: 100%;
+                    background-color: #FAFAFA;
+                    padding: 10px 10px 10px;
+                    margin-bottom: 15px;
+                    border-radius: 5px;
+                    border: 1px solid #ddd;
+                }
+
+                .comments .add-comment {
+                    background-color: transparent;
+                    border: none;
+                    position: relative;
+                    margin-bottom: 50px;
+                }
+
+                .comments .commenter-pic {
+                    width: 50px;
+                    height: 50px;
+                    display: inline-block;
+                    border-radius: 100%;
+                    border: 2px solid #fff;
+                    overflow: hidden;
+                    background-color: #fff;
+                }
+
+                .comments .add-comment .commenter-name {
+                    width: 100%;
+                    padding-left: 75px;
+                    position: absolute;
+                    top: 20px;
+                    left: 0px;
+                }
+
+                .comments .add-comment input {
+                    border-top: 0px;
+                    border-bottom: 1px solid #ccc;
+                    border-left: 0px;
+                    border-right: 0px;
+                    outline: 0px;
+                    box-shadow: none;
+                    border-radius: 0;
+                    width: 100%;
+                    padding: 0;
+                    font-weight: normal;
+                }
+
+                .comments .add-comment input:focus {
+                    border-color: #03a9f4;
+                    border-width: 2px;
+                }
+
+                .comments .add-comment button[type=submit] {
+                    background-color: #03a9f4;
+                    color: #fff;
+                    margin-right: 0px;
+                }
+
+                .comments .add-comment button {
+                    background-color: #f5f5f5;
+                    margin: 10px 5px;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    float: right;
+                }
+
+                .comments .commenter-name .comment-time {
+                    font-weight: normal;
+                    margin-left: 8px;
+                    font-size: 15px;
+                }
+
+                .comments p.comment-txt {
+                    font-size: 15px;
+                    border-bottom: 1px solid #ddd;
+                    padding: 0px 0px 15px;
+                }
+
+                .comments .commenter-name {
+                    display: inline-block;
+                    position: relative;
+                    top: -20px;
+                    left: 10px;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+                .comments .comment-meta {
+                    font-size: 14px;
+                    color: #333;
+                    padding: 2px 5px 0px;
+                    line-height: 20px;
+                    float: right;
+                }
+
+                .comments .reply-box {
+                    display: none;
+                }
+
+                .comments .replied {
+                    background-color: #fff;
+                    width: 95%;
+                    float: right;
+                    margin-top: 15px;
+                }
+
+                /*======Responsive CSS=======*/
+                @media (max-width: 767px) {
+                    .comments .commenter-name {
+                        font-size: 13px;
+                        top: -5px;
+                    }
+
+                    .comments .commenter-pic {
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    .comments .commenter-name a {
+                        display: block;
+                    }
+
+                    .comments .commenter-name .comment-time {
+                        display: block;
+                        margin-left: 0px;
+                    }
+                }
+            </style>
+            <!-- <th:block th:replace="comment_fragment/comment_fragment.html :: commentFragment"></th:block>-->
+
+
+        </div>
+    </div>
+</th:block>
+
+</html>

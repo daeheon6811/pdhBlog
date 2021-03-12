@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="sidebarFragment">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"><sec sec:authentication="name">님 환영합니다!</sec> <sup>2</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <form th:action="@{/user/myinfo}" method="post">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/user/myinfo}" >
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>내 정보</span></a>
+            </li>
+        </form>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Setting
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>내가 쓴 글</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">업데이트 목록</h6>
+                    <a class="collapse-item" href="buttons.html">게시글</a>
+                    <a class="collapse-item" href="cards.html">댓글</a>
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+               aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>게시판 설정</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">색상,글꼴 및 언어 변경</h6>
+                    <a class="collapse-item" href="utilities-color.html">색상 설정</a>
+                    <a class="collapse-item" href="utilities-border.html">글꼴 설정</a>
+                    <a class="collapse-item" href="utilities-animation.html">언어 변경</a>
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Board
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#boardlist"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>게시판</span>
+            </a>
+            <div id="boardlist" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">게시판</h6>
+                    <a class="collapse-item" th:href="@{/user/freeboard}" >자유게시판</a>
+                    <a class="collapse-item" href="cards.html">건의게시판</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Study
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#datalist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>데이터 처리 및 설계</span>
+            </a>
+            <div id="datalist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/user/A1400}">알고리즘</a>
+                    <a class="collapse-item" th:href="@{/user/A1401}">자료구조</a>
+                    <a class="collapse-item" th:href="@{/user/A1402}">디자인패턴</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#langlist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>프로그래밍 언어 </span>
+            </a>
+            <div id="langlist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">언어</h6>
+                    <a class="collapse-item" th:href="@{/user/A1500}">C</a>
+                    <a class="collapse-item" th:href="@{/user/A1501}">C++</a>
+                    <a class="collapse-item" th:href="@{/user/A1502}">C#</a>
+                    <a class="collapse-item" th:href="@{/user/A1503}">java</a>
+                    <a class="collapse-item" th:href="@{/user/A1504}">코틀린</a>
+                    <a class="collapse-item" th:href="@{/user/A1505}">python</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">GUI</h6>
+                    <a class="collapse-item" th:href="@{/user/A1510}">Windows API</a>
+                    <a class="collapse-item" th:href="@{/user/A1511}">.DOT.NET</a>
+                    <a class="collapse-item" th:href="@{/user/A1512}">MFC</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dblist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>데이터베이스</span>
+            </a>
+            <div id="dblist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">DBMS</h6>
+                    <a class="collapse-item" th:href="@{/user/A1600}">오라클</a>
+                    <a class="collapse-item" th:href="@{/user/A1601}">mysql</a>
+                    <h6 class="collapse-header">ORA</h6>
+                    <a class="collapse-item" th:href="@{/user/A1610}">Mybatis</a>
+                    <a class="collapse-item" th:href="@{/user/A1611}">JPA</a>
+                    <a class="collapse-item" th:href="@{/user/A1612}">히포네이트</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#weblist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>웹 개발 & 프레임 워크</span>
+            </a>
+            <div id="weblist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">BackEnd</h6>
+                    <a class="collapse-item" th:href="@{/user/A1700}">Django</a>
+                    <a class="collapse-item" th:href="@{/user/A1701}">Spring & Spring boot</a>
+                    <a class="collapse-item" th:href="@{/user/A1702}">Node.js</a>
+                    <a class="collapse-item" th:href="@{/user/A1703}">JSP</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">FrontEnd</h6>
+                    <a class="collapse-item" th:href="@{/user/A1710}">타임 리프</a>
+                    <a class="collapse-item" th:href="@{/user/A1711}">html/css</a>
+                    <a class="collapse-item" th:href="@{/user/A1712}">javascript</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mobilelist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>앱 개발</span>
+            </a>
+            <div id="mobilelist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">IOS</h6>
+                    <a class="collapse-item" th:href="@{/user/A1800}">스위프트</a>
+                    <a class="collapse-item" th:href="@{/user/A1801}">objectC</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">Android</h6>
+                    <a class="collapse-item" th:href="@{/user/A1810}">JAVA</a>
+                    <a class="collapse-item" th:href="@{/user/A1811}">코틀린</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gamelist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>게임 개발 & 프레임 워크</span>
+            </a>
+            <div id="gamelist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Server & Socket</h6>
+                    <a class="collapse-item" href="login.html">SuperSocket</a>
+                    <a class="collapse-item" href="login.html">RakNet</a>
+                    <a class="collapse-item" href="register.html">Socket프로그래밍</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">엔진</h6>
+                    <a class="collapse-item" href="error/404.html">유니티</a>
+                    <a class="collapse-item" href="blank.html">언리얼</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#seclist"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>보안 & 해킹</span>
+            </a>
+            <div id="seclist" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">보안 솔루션</h6>
+                    <a class="collapse-item" href="register.html">스프링 시큐리티</a>
+                    <h6 class="collapse-header">보안</h6>
+                    <a class="collapse-item" href="login.html">리버싱</a>
+                    <a class="collapse-item" href="login.html">웹 애플리케이션 보안</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">해킹</h6>
+                    <a class="collapse-item" href="error/404.html">모의해킹</a>
+
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="sidebar-card">
+            <a class="btn btn-success btn-sm" th:href="@{/user/logout}">로그아웃</a>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+    <!-- End of Sidebar -->
+
+</th:block>
+
+</html>

@@ -1,0 +1,46 @@
+#dataSource orcl
+spring:
+
+  datasource:
+    # ����Ŭ 9���� ���� driverClassName: oracle.jdbc.driver.OracleDriver
+     driverClassName: oracle.jdbc.OracleDriver
+     url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+     username: c##tester
+     password: test
+  thymeleaf:
+     cache: false
+     enabled: true
+     encoding: UTF-8
+     prefix: classpath:/templates/
+     suffix: .html
+     check-template-location: true
+     mode: LEGACYHTML5
+  devtools:
+     livereload:
+        enabled: true
+  freemarker:
+    cache: false
+  jpa:
+    hibernate:
+      ddl-auto:
+    properties:
+      hibernate:
+        show-sql: true # 시스템아웃에 찍는다. 운영에서 사용하지 말자
+        use_sql_comments: true
+        format_sql: true
+  rsocket:
+    server:
+      port: 8080
+      address: 58.231.25.244
+
+
+
+
+
+
+
+
+
+
+
+

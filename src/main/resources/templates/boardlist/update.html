@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="content">
+    <div class="container-fluid">
+
+        <div class="container-fluid .border-left-secondary">
+            <form th:action="@{/user/board/update/reulst/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"   method="POST">
+                <div class="form-group">
+                    <label>제목</label>
+                    <input type="text" class="form-control border-left-primary"  th:name ="title" th:value="${boardDto.title}"  >
+                </div>
+                <div class="form-group">
+                    <label>작성자</label>
+                    <input type="text"  class="form-control border-left-secondary bg-gray-200" disabled  th:value="${boardDto.email}" th:placeholder="${#authentication.getName()}"
+                           placeholder="">
+                </div>
+                <div class="form-group">
+                    <label>내용</label>
+                    <textarea class="form-control border-bottom-secondary"    rows="20" th:name ="content"   th:value="${boardDto.content}"  th:text="${boardDto.content}"></textarea>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">완료</button>
+            </form>
+
+            <form th:action="@{/user/board/delete/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}" method="POST">
+                <button type="submit" class="btn btn-primary">삭제</button>
+            </form>
+        </div>
+
+    </div>
+</th:block>
+</html>
