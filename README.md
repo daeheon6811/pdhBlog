@@ -12,7 +12,7 @@ Spring Boot , Spring Security , JPA + Hiborate , Mybatis(혼합 예정) , Boosta
 
 내 정보 변경 (구현)
 
-글쓰기 (구현)
+글쓰기,수정,삭제 (구현)
 
 댓글 쓰기 (구현)
 
