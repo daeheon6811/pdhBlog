@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+// 댓글 Dto
+
 @Getter
 @Setter
 @ToString

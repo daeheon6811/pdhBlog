@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+// 유저 정보
+
 @Controller
 @AllArgsConstructor
 public class MemberController {

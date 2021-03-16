@@ -9,6 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//게시판 종류
+
 public class BoardKindController {
     private BoardService boardService;
     private CommentService commentService;

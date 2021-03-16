@@ -20,6 +20,7 @@ public class BoardService {
 
     private BoardRepository boardRepository;
 
+    /*글 쓰기 */
     @Transactional
     public String write(BoardDto boardDto)
     {
@@ -30,6 +31,7 @@ public class BoardService {
         BoardEntity a = boardRepository.save(boardDto.toEntity());
         return "저장";
     }
+    /*게시글 리스트 조회*/
     @Transactional
     public Page<BoardEntity>  getBoardList(Pageable pageable , String type)
     {
@@ -41,6 +43,7 @@ public class BoardService {
         return boardRepository.findAll((spec),pageable);
 
     }
+    /*검색 조회*/
     @Transactional
     public Page<BoardEntity>  getBoardSearchList(Pageable pageable , String serach , String type)
     {
@@ -54,6 +57,7 @@ public class BoardService {
         return boardRepository.findAll((spec), pageable);
 
     }
+    /*글 보기 조회 */
     @Transactional
     public BoardDto View(int num , String type){
 
@@ -63,12 +67,14 @@ public class BoardService {
         return boardEntity.toDto();
     }
 
+    /*글 수정 */
     @Transactional
     public BoardDto Update(BoardDto boardDto)
     {
         boardRepository.save(boardDto.toEntity());
         return boardDto;
     }
+    /*글 삭제*/
     @Transactional
     public void Delete(BoardDto boardDto)
     {

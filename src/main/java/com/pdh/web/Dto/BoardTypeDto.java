@@ -4,6 +4,8 @@ import com.pdh.web.entity.BoardEntity;
 import com.pdh.web.entity.BoardTypeEntity;
 import lombok.*;
 
+//게시판 Type Dto
+
 @Getter
 @Setter
 @ToString

@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+
+// 게시판 dto
+
 @Getter
 @Setter
 @ToString

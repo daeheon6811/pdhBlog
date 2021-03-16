@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> , JpaSpecificationExecutor<BoardEntity> {
-    Optional<BoardEntity> findByNumAndType(int i , String type);
+    Optional<BoardEntity> findByNumAndType(int i , String type); // 번호,타입 조회
 
-    Page<BoardEntity> findAll(@Nullable  Specification<BoardEntity> spec, Pageable pageable);
+    Page<BoardEntity> findAll(@Nullable  Specification<BoardEntity> spec, Pageable pageable); // 모든 리스트 조회
     Page<BoardEntity> findAllBy(Pageable pageable);
 
 

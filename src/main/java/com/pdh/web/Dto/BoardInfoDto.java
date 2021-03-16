@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.persistence.Column;
 
+// 게시판 정보 DTO
+
 @Getter
 @Setter
 @ToString

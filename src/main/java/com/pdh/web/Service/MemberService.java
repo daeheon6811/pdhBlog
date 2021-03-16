@@ -26,8 +26,7 @@ import java.util.Optional;
 public class MemberService implements UserDetailsService {
 
     private MemberRepository memberRepository;
-
-
+    /*회원 가입 */
     @Transactional
     public String joinUser(MemberDto memberDto) {
 
@@ -45,6 +44,7 @@ public class MemberService implements UserDetailsService {
         }
     }
 
+    /*이메일 검색*/
     @Transactional
     public String searchemail(MemberDto memberDto) {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
@@ -55,6 +55,7 @@ public class MemberService implements UserDetailsService {
         }
     }
 
+    /*패스워드 새로 생성*/
     @Transactional
     public void rename_password(MemberDto memberDto) {
 
@@ -64,6 +65,7 @@ public class MemberService implements UserDetailsService {
             memberRepository.save(memberDto.toEntity());
     }
 
+    /*유저 업데이트*/
     @Transactional
     public MemberDto update_user(MemberDto memberDto) {
 
@@ -101,6 +103,7 @@ public class MemberService implements UserDetailsService {
         }
     }
 
+    /*내 정보*/
     @Transactional
     public MemberDto MyInformation(User user) {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(user.getUsername());
@@ -118,6 +121,7 @@ public class MemberService implements UserDetailsService {
     }
 
 
+    /*로그인 시도*/
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String Id) throws UsernameNotFoundException {
