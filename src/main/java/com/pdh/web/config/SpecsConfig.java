@@ -17,11 +17,8 @@ public class SpecsConfig {
 
 
 
-    public static Specification<BoardEntity>titleLike(final String Keyword){
-        return (root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.like(root.get("title"),Keyword,root.get("title"));
 
-    }
+    /*제목 항목ㅈ ㅗ회*/
     public static Specification<BoardEntity> title_searech(final String keyword) {
 
         return new Specification<BoardEntity>() {
@@ -32,6 +29,7 @@ public class SpecsConfig {
             }
         };
     }
+    /*글 종류 조회*/
     public static Specification<BoardEntity> type_searech(final String keyword) {
 
         return new Specification<BoardEntity>() {
@@ -43,6 +41,7 @@ public class SpecsConfig {
         };
     }
 
+    /*글 번호 조회 */
     public static Specification<CommentEntity> boardnum_searech(final String keyword) {
 
         return new Specification<CommentEntity>() {
@@ -54,23 +53,7 @@ public class SpecsConfig {
         };
     }
 
-    public static Specification<BoardEntity>searchboard(Map<String,Object> filter) {
-        return (root, criteriaQuery, criteriaBuilder) ->
-        {
-            List<Predicate> predicates = new ArrayList<>();
 
-            filter.forEach((key, value) -> {
-                String likeValue = "%" + value + "%";
-                switch (key) {
-                    case "title":
-                        predicates.add(criteriaBuilder.like(root.get(key).as(String.class), likeValue));
-                        break;
-                }
-            });
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        };
-
-    }
 
 
 }

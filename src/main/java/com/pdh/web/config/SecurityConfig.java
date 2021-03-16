@@ -12,11 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-/*
-@RequiredArgsConstructor
-@EnableWebSecurity // 1 Spring Security를 활성화한다는 의미의 어노테이션입니다.
-@Configuration
-*/
+
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -29,15 +25,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception
-    {
+    public void configure(WebSecurity web) throws Exception {
 
-        /*
+
         // static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
         web.ignoring().antMatchers("/css/**",
-                "/js/**", "/img/**", "/lib/**" , "/vendor/**"
-        , "/css/**") ;
-*/
+                "/js/**", "/img/**", "/lib/**", "/vendor/**"
+                , "/css/**");
+
 
     }
 
