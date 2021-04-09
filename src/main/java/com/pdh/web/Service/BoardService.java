@@ -4,6 +4,7 @@ import com.pdh.web.config.SpecsConfig;
 import com.pdh.web.entity.BoardEntity;
 import com.pdh.web.repository.BoardRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +19,12 @@ import java.util.*;
 @AllArgsConstructor
 public class BoardService {
 
+    @Autowired
     private BoardRepository boardRepository;
 
     /*글 쓰기 */
     @Transactional
-    public String write(BoardDto boardDto)
+    public String Write(BoardDto boardDto)
     {
 
         boardDto.setBad(0);
@@ -33,26 +35,26 @@ public class BoardService {
     }
     /*게시글 리스트 조회*/
     @Transactional
-    public Page<BoardEntity>  getBoardList(Pageable pageable , String type)
+    public Page<BoardEntity>  GetBoardList(Pageable pageable , String type)
     {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,10,Sort.by(Sort.Direction.DESC, "num"));
 
-        Specification<BoardEntity> spec = Specification.where(SpecsConfig.type_searech(type));
+        Specification<BoardEntity> spec = Specification.where(SpecsConfig.TypeSearech(type));
 
         return boardRepository.findAll((spec),pageable);
 
     }
     /*검색 조회*/
     @Transactional
-    public Page<BoardEntity>  getBoardSearchList(Pageable pageable , String serach , String type)
+    public Page<BoardEntity>  GetBoardSearchList(Pageable pageable , String serach , String type)
     {
         String search = serach;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,10);
 
-        Specification<BoardEntity> spec = Specification.where(SpecsConfig.title_searech(search));
-        spec = spec.and(SpecsConfig.type_searech(type));
+        Specification<BoardEntity> spec = Specification.where(SpecsConfig.TitleSearech(search));
+        spec = spec.and(SpecsConfig.TypeSearech(type));
 
         return boardRepository.findAll((spec), pageable);
 

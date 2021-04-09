@@ -31,7 +31,7 @@ public class MemberController {
     @PostMapping("/user/register")
     public String execSignup(@ModelAttribute(name = "memberDto")  MemberDto memberDto) {
 
-         String result = memberService.joinUser(memberDto);
+         String result = memberService.JoinUser(memberDto);
          if(result.equals("존재"))
          {
              return "/register";
@@ -40,7 +40,7 @@ public class MemberController {
          }
     }
     @GetMapping("/user/forgot-password")
-    public String  forgot_password() {
+    public String  ForgotPassword() {
         return "/forgot-password";
     }
 
@@ -49,7 +49,7 @@ public class MemberController {
     public String emailSearch(@ModelAttribute(name = "memberDto")  MemberDto memberDto){
 
 
-        String result = memberService.searchemail(memberDto);
+        String result = memberService.SearchEmail(memberDto);
         if (result.equals("이메일성공")) {
             return "/rename-password";
         } else {
@@ -57,18 +57,19 @@ public class MemberController {
         }
     }
     @GetMapping("/user/rename-password")
-    public String  rename_password() {
+    public String  RenamePassword() {
         return "/rename-password";
     }
 
 
+    // 비밀번호 찾기 (미구현)
     @PostMapping("/user/rename-password")
-    public String rename_password_clear(@ModelAttribute(name = "memberDto")
+    public String RenamePasswordClear(@ModelAttribute(name = "memberDto")
                                             @PathVariable("email") String email,
                                                     MemberDto memberDto){
 
         memberDto.setEmail(email);
-       memberService.rename_password(memberDto);
+       memberService.RenamePassword(memberDto);
             return "/login";
 
     }
@@ -91,7 +92,7 @@ public class MemberController {
     }
 
     @GetMapping("/user/myinfo")
-    public String myinfo(@AuthenticationPrincipal User user , Model model) {
+    public String MyInfo(@AuthenticationPrincipal User user , Model model) {
 
         MemberDto memberDto = memberService.MyInformation(user);
         model.addAttribute("memberDto",memberDto);
@@ -101,7 +102,7 @@ public class MemberController {
     }
 
     @PostMapping("/user/myinfo/update")
-    public String info_update(@AuthenticationPrincipal User user ,
+    public String InfoUpdate(@AuthenticationPrincipal User user ,
                               Model model ,
                               @ModelAttribute MemberDto memberDto) {
 
@@ -111,7 +112,7 @@ public class MemberController {
         memberDto.setWarning(back_memberDto.getWarning());
         memberDto.setCreateyear(back_memberDto.getCreateyear());
 
-        memberDto = memberService.update_user(memberDto);
+        memberDto = memberService.UpdateUser(memberDto);
 
         return "redirect:/user/myinfo";
 

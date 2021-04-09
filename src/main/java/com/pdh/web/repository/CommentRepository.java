@@ -17,7 +17,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     /*글 번호 , 댓글 번호 , 타입 조회*/
     Optional<CommentEntity> findByCommentnumAndBoardnumAndType(int commentnum, int boardnum, String type);
 
+    /*모든 목록 조회*/
     Page<CommentEntity> findAll(@Nullable Specification<CommentEntity> spec, Pageable pageable);
 
-    Page<CommentEntity> findAllBy(Pageable pageable);
 }

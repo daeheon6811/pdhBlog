@@ -31,14 +31,14 @@ public class CommentService {
 
     /*댓글 남기기*/
     @Transactional
-    public void reply(CommentDto commentDto) {
+    public void Reply(CommentDto commentDto) {
         commentRepository.save(commentDto.toEntity());
     }
 
 
     /*좋아요*/
     @Transactional
-    public void likes(int num, int boardnum, String type) {
+    public void Likes(int num, int boardnum, String type) {
         Optional<CommentEntity> likesOptional = commentRepository.findByCommentnumAndBoardnumAndType(num, boardnum, type);
         CommentEntity commentEntity = likesOptional.get();
         System.out.println("like:" + commentEntity.getLike());
@@ -48,7 +48,7 @@ public class CommentService {
 
     /*싫어요*/
     @Transactional
-    public void bed(int num, int boardnum, String type) {
+    public void Bed(int num, int boardnum, String type) {
         Optional<CommentEntity> likesOptional = commentRepository.findByCommentnumAndBoardnumAndType(num, boardnum, type);
         CommentEntity commentEntity = likesOptional.get();
         commentEntity.setBad(commentEntity.getBad() + 1);
@@ -58,20 +58,20 @@ public class CommentService {
 
     /*댓글 갯수 */
     @Transactional
-    public Long replycount(int boardnum, String type) {
+    public Long ReplyCount(int boardnum, String type) {
         return commentRepository.countByBoardnumAndType(boardnum, type);
     }
 
     /*댓글 리스트 */
     @Transactional
-    public Page<CommentEntity> getCommendList(Pageable pageable, int boardnum) {
+    public Page<CommentEntity> GetCommendList(Pageable pageable, int boardnum) {
 
 
         String boardnum_str = Integer.toString(boardnum);
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, 25, Sort.by(Sort.Direction.DESC, "writeryear"));
-        Specification<CommentEntity> spec = Specification.where(SpecsConfig.boardnum_searech(boardnum_str));
+        Specification<CommentEntity> spec = Specification.where(SpecsConfig.BoardNumSearech(boardnum_str));
 
         return commentRepository.findAll((spec), pageable);
     }

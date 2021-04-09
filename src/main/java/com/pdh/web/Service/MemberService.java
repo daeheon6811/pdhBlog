@@ -28,7 +28,7 @@ public class MemberService implements UserDetailsService {
     private MemberRepository memberRepository;
     /*회원 가입 */
     @Transactional
-    public String joinUser(MemberDto memberDto) {
+    public String JoinUser(MemberDto memberDto) {
 
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
 
@@ -46,7 +46,7 @@ public class MemberService implements UserDetailsService {
 
     /*이메일 검색*/
     @Transactional
-    public String searchemail(MemberDto memberDto) {
+    public String SearchEmail(MemberDto memberDto) {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
         if (userEntityWrapper.isEmpty()) {
             return "존재";
@@ -57,7 +57,7 @@ public class MemberService implements UserDetailsService {
 
     /*패스워드 새로 생성*/
     @Transactional
-    public void rename_password(MemberDto memberDto) {
+    public void RenamePassword(MemberDto memberDto) {
 
             Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -67,7 +67,7 @@ public class MemberService implements UserDetailsService {
 
     /*유저 업데이트*/
     @Transactional
-    public MemberDto update_user(MemberDto memberDto) {
+    public MemberDto UpdateUser(MemberDto memberDto) {
 
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
 
@@ -136,7 +136,7 @@ public class MemberService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if (("admin@example.com").equals(Id)) {
+        if (("wow1186@naver.com").equals(Id)) {
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
