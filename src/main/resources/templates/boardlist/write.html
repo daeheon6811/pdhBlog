@@ -10,11 +10,13 @@
             <form th:action="@{/user/write/result/{type_nm}(type_nm=${type})}" method="post">
                 <div class="form-group">
                     <label>제목</label>
-                    <input type="text" class="form-control border-left-primary" th:name="title" placeholder="제목을 입력하세요.">
+                    <input type="text" class="form-control border-left-primary" th:name="title"
+                           placeholder="제목을 입력하세요.">
                 </div>
                 <div class="form-group">
                     <label>작성자</label>
-                    <input type="text"  class="form-control border-left-secondary bg-gray-200" th:placeholder="${#authentication.getName()}"  disabled  placeholder="">
+                    <input type="text" class="form-control border-left-secondary bg-gray-200"
+                           th:placeholder="${#authentication.getName()}" disabled placeholder="">
                 </div>
                 <div class="form-group">
                     <label>내용</label>

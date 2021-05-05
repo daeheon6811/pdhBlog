@@ -28,7 +28,7 @@ public class MemberService implements UserDetailsService {
     private MemberRepository memberRepository;
     /*회원 가입 */
     @Transactional
-    public String JoinUser(MemberDto memberDto) {
+    public String getJoinUser(MemberDto memberDto) {
 
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
 
@@ -46,7 +46,7 @@ public class MemberService implements UserDetailsService {
 
     /*이메일 검색*/
     @Transactional
-    public String SearchEmail(MemberDto memberDto) {
+    public String getSearchEmail(MemberDto memberDto) {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
         if (userEntityWrapper.isEmpty()) {
             return "존재";
@@ -57,7 +57,7 @@ public class MemberService implements UserDetailsService {
 
     /*패스워드 새로 생성*/
     @Transactional
-    public void RenamePassword(MemberDto memberDto) {
+    public void getRenamePassword(MemberDto memberDto) {
 
             Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -67,7 +67,7 @@ public class MemberService implements UserDetailsService {
 
     /*유저 업데이트*/
     @Transactional
-    public MemberDto UpdateUser(MemberDto memberDto) {
+    public MemberDto getUpdateUser(MemberDto memberDto) {
 
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
 
@@ -77,7 +77,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public int CheckPassword(MemberDto memberDto) {
+    public int getCheckPassword(MemberDto memberDto) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
@@ -105,7 +105,7 @@ public class MemberService implements UserDetailsService {
 
     /*내 정보*/
     @Transactional
-    public MemberDto MyInformation(User user) {
+    public MemberDto getMyInformation(User user) {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(user.getUsername());
         MemberEntity userEntity = userEntityWrapper.get();
         String email = userEntity.getEmail();

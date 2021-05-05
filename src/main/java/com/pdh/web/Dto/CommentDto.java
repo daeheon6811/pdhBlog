@@ -2,12 +2,7 @@ package com.pdh.web.Dto;
 
 import com.pdh.web.entity.CommentEntity;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 // 댓글 Dto

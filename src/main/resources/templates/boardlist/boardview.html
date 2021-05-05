@@ -41,7 +41,8 @@
             </div>
             <div class="card-body">
                 <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i>10 min ago</div>
-                <h6 type="h7 text-muted" th:value="${boardDto.writeryear}" th:text="${#temporals.format(boardDto.writeryear , 'yyyy-MM-dd HH:mm')}"></h6>
+                <h6 type="h7 text-muted" th:value="${boardDto.writeryear}"
+                    th:text="${#temporals.format(boardDto.writeryear , 'yyyy-MM-dd HH:mm')}"></h6>
                 <h6 type="h7 text-muted" th:value="${boardDto.views}" th:text="${boardDto.views}"></h6>
 
 
@@ -56,27 +57,27 @@
             <div class="card-footer">
                 <div class="col-xs-12">
                     <div class="row">
-                    <div class="col-xs-4">
+                        <div class="col-xs-4">
 
-                        <form th:action="@{/user/board/update/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
-                              method="POST">
-                            <button type="submit" class="btn-sm btn-primary"><i class="fa fa-list"></i> 목록</button>
-                        </form>
-                    </div>
-                    <div th:if="${boardDto.email.toString().equals(#authentication.getName())}" class="col-xs-4">
+                            <form th:action="@{/user/board/update/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                                  method="POST">
+                                <button type="submit" class="btn-sm btn-primary"><i class="fa fa-list"></i> 목록</button>
+                            </form>
+                        </div>
+                        <div th:if="${boardDto.email.toString().equals(#authentication.getName())}" class="col-xs-4">
 
-                        <form th:action="@{/user/board/update/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
-                              method="POST">
-                            <button type="submit" class="btn-sm btn-primary"><i class="fa fa-save"></i> 수정</button>
-                        </form>
-                    </div>
-                    <div th:if="${boardDto.email.toString().equals(#authentication.getName())}" class="col-xs-4">
+                            <form th:action="@{/user/board/update/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                                  method="POST">
+                                <button type="submit" class="btn-sm btn-primary"><i class="fa fa-save"></i> 수정</button>
+                            </form>
+                        </div>
+                        <div th:if="${boardDto.email.toString().equals(#authentication.getName())}" class="col-xs-4">
 
-                        <form th:action="@{/user/board/delete/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
-                              method="POST">
-                            <button type="submit" class="btn-sm btn-primary"><i class="fa fa-trash"></i> 삭제</button>
-                        </form>
-                    </div>
+                            <form th:action="@{/user/board/delete/{num_id}/{type_id}(num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                                  method="POST">
+                                <button type="submit" class="btn-sm btn-primary"><i class="fa fa-trash"></i> 삭제</button>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
@@ -88,7 +89,8 @@
                 <div class="col-12">
                     <div class="comments">
                         <div class="comments-details">
-                            <span class="total-comments comments-sort" th:text="${commendcount}" th:value="${commendcount}"></span>개의 댓글을 남겼습니다!
+                            <span class="total-comments comments-sort" th:text="${commendcount}"
+                                  th:value="${commendcount}"></span>개의 댓글을 남겼습니다!
                             <div class="comment-box add-comment">
                             <span class="commenter-pic">
                                 <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-fluid">
@@ -109,19 +111,22 @@
                                 <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-fluid">
                             </span>
                                 <span class="commenter-name">
-                                <span class="comment-time" th:text="${#temporals.format(comment.writeryear , 'yyyy-MM-dd HH:mm')}"></span>
+                                <span class="comment-time"
+                                      th:text="${#temporals.format(comment.writeryear , 'yyyy-MM-dd HH:mm')}"></span>
                             </span>
                                 <p class="comment-txt more" th:text="${comment.comment}"></p>
                                 <div class="comment-meta">
-                                     <form th:action="@{/user/board/view/{num_id}/{type_id}/{comment_id}/comment/like/(num_id=${boardDto.num},type_id= ${boardDto.type},comment_id= ${comment.commentnum})}"
+                                    <form th:action="@{/user/board/view/{num_id}/{type_id}/{comment_id}/comment/like/(num_id=${boardDto.num},type_id= ${boardDto.type},comment_id= ${comment.commentnum})}"
                                           method="POST">
-                                    <button class="comment-like" type="submit" ><i class="fa fa-thumbs-up" th:name=like
-                                                                  th:text="${comment.like}"></i></button>
-                                        </form>
+                                        <button class="comment-like" type="submit"><i class="fa fa-thumbs-up"
+                                                                                      th:name=like
+                                                                                      th:text="${comment.like}"></i>
+                                        </button>
+                                    </form>
                                     <form th:action="@{/user/board/view/{num_id}/{type_id}/{comment_id}/comment/bed/(num_id=${boardDto.num},type_id= ${boardDto.type},comment_id= ${comment.commentnum})}"
                                           method="POST">
-                                    <button class="comment-dislike"><i class="fa fa-thumbs-down" aria-hidden="true"
-                                                                       th:text="${comment.bad}"></i></button>
+                                        <button class="comment-dislike"><i class="fa fa-thumbs-down" aria-hidden="true"
+                                                                           th:text="${comment.bad}"></i></button>
                                     </form>
                                     <button class="comment-reply reply-popup"><i class="fa fa-reply-all"
                                                                                  aria-hidden="true"></i>답글 달기
@@ -168,7 +173,9 @@
                                 <!--1,2,3,4,.. 등 페이지-->
                                 <li th:each="page: ${#numbers.sequence(start, last)}" class="page-item"
                                     th:class="${page == commendlist.number + 1} ? 'active'">
-                                    <a th:text="${page}" th:href="@{/user/board/view/{num_id}/{type_id}(page=${page},num_id=${boardDto.num},type_id= ${boardDto.type})}" class="page-link"></a>
+                                    <a th:text="${page}"
+                                       th:href="@{/user/board/view/{num_id}/{type_id}(page=${page},num_id=${boardDto.num},type_id= ${boardDto.type})}"
+                                       class="page-link"></a>
                                 </li>
                                 <!--다음 페이지로 -->
                                 <li th:class="${commendlist.last} ? 'disabled'" class="page-item">

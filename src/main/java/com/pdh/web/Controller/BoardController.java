@@ -30,14 +30,14 @@ public class BoardController {
     // 메인 페이지
 
     @GetMapping("/user/write/{type}")
-    public String Write(@PathVariable("type") String type, Model model) {
+    public String write(@PathVariable("type") String type, Model model) {
         model.addAttribute("type", type);
         return "boardlist/write";
     }
 
     //검색하기
     @GetMapping("/user/board/search/{type}")
-    public String Search(@PathVariable("type") String type,
+    public String search(@PathVariable("type") String type,
                          Model model,
                          @RequestParam("search_value") String search_value,
                          BoardDto boardDto,
@@ -45,56 +45,56 @@ public class BoardController {
 
         model.addAttribute("search_value", search_value);
         model.addAttribute("type", type);
-        model.addAttribute("list", boardService.GetBoardSearchList(pageable, search_value, type));
+        model.addAttribute("list", boardService.getBoardSearchList(pageable, search_value, type));
         return "/boardlist/board";
     }
 
     // 자유게시판 이동
     @GetMapping("/user/freeboard")
-    public String FreeBoard(Model model, @PageableDefault Pageable pageable) {
+    public String freeBoard(Model model, @PageableDefault Pageable pageable) {
         String type = "freeboard";
-        Page<BoardEntity> boardDtoPage = boardService.GetBoardList(pageable, type);
-        model.addAttribute("list", boardService.GetBoardList(pageable, type));
+        Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
+        model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", "freeboard");
         return "/boardlist/board";
     }
 
     //글을 쓰고 난후
     @PostMapping("/user/write/result/{type}")
-    public String WriteResult(BoardDto boardDto,
+    public String writeResult(BoardDto boardDto,
                               @PathVariable("type") String type,
                               @AuthenticationPrincipal User user) {
         boardDto.setEmail(user.getUsername());
         boardDto.setType(type);
-        boardService.Write(boardDto);
+        boardService.getWrite(boardDto);
         return "redirect:/user/" + type + "";
     }
 
     //글 보기
     @GetMapping("/user/board/view/{num}/{type}")
-    public String View(BoardDto boardDto, Model model,
+    public String view(BoardDto boardDto, Model model,
                        @PathVariable("num") int num,
                        @PathVariable("type") String type,
                        @PageableDefault Pageable pageable
     ) {
-        boardDto = boardService.View(num, type);
+        boardDto = boardService.getView(num, type);
 
         model.addAttribute("boardDto", boardDto);
-        model.addAttribute("commendlist", commentService.GetCommendList(pageable, num));
-        model.addAttribute("commendcount", commentService.ReplyCount(num, type));
+        model.addAttribute("commendlist", commentService.getCommendList(pageable, num));
+        model.addAttribute("commendcount", commentService.getReplyCount(num, type));
 
         return "/boardlist/boardview";
     }
 
     // 글 수정
     @PostMapping("/user/board/update/{num}/{type}")
-    public String Update(@PathVariable("num") int num,
+    public String update(@PathVariable("num") int num,
                          @PathVariable("type") String type,
                          @ModelAttribute(name = "boardDto") BoardDto boardDto,
                          Model model) {
 
 
-        boardDto = boardService.View(num, type);
+        boardDto = boardService.getView(num, type);
         boardDto.setType(type);
         boardDto.setNum(num);
         model.addAttribute("boardDto", boardDto);
@@ -103,17 +103,17 @@ public class BoardController {
 
     // 글 수정 결과
     @PostMapping("/user/board/update/result/{num}/{type}")
-    public String UpdateResult(@PathVariable("num") int num,
+    public String updateResult(@PathVariable("num") int num,
                                 @PathVariable("type") String type,
                                 @ModelAttribute(name = "boardDto") BoardDto boardDto,
                                 @AuthenticationPrincipal User user,
                                 Model model) {
-        boardDto = boardService.View(num, type);
+        boardDto = boardService.getView(num, type);
         boardDto.setEmail(user.getUsername());
         boardDto.setWriteryear(LocalDateTime.now());
         boardDto.setType(type);
         boardDto.setNum(num);
-        boardDto = boardService.Update(boardDto);
+        boardDto = boardService.getUpdate(boardDto);
         System.out.println("내용값:" + boardDto.getContent());
         model.addAttribute("boardDto", boardDto);
         return "redirect:/user/board/view/{num}/{type}";
@@ -121,16 +121,16 @@ public class BoardController {
 
     //글삭제
     @PostMapping("/user/board/delete/{num}/{type}")
-    public String Delete(@PathVariable("num") int num,
+    public String delete(@PathVariable("num") int num,
                          @PathVariable("type") String type,
                          BoardDto boardDto,
                          Model model) {
-        boardService.Delete(boardDto);
+        boardService.getDelete(boardDto);
         return "redirect:/user/freeboard";
     }
 
     @PostMapping("/user/board/view/{num}/{type}/comment/")
-    public String CommentReply(
+    public String commentReply(
             @PathVariable("num") int boardnum,
             @PathVariable("type") String type,
             @ModelAttribute("CommentDto") CommentDto commentDto,
@@ -141,7 +141,7 @@ public class BoardController {
         commentDto.setBoardnum(boardnum);
         commentDto.setType(type);
 
-        commentService.Reply(commentDto);
+        commentService.getReply(commentDto);
         return "redirect:/user/board/view/{num}/{type}/";
     }
 
@@ -151,18 +151,18 @@ public class BoardController {
                             @PathVariable("type") String type,
                             @PathVariable("comment") int comment
     ) {
-        commentService.Likes(comment, num, type);
+        commentService.getLikes(comment, num, type);
         return "redirect:/user/board/view/{num}/{type}/";
     }
 
     // 댓글 비추천
     @PostMapping("/user/board/view/{num}/{type}/{comment}/comment/bed/")
-    public String ReplyBed(@PathVariable("num") int num,
+    public String replyBed(@PathVariable("num") int num,
                            @PathVariable("type") String type,
                            @PathVariable("comment") int comment
     ) {
         System.out.println("시작");
-        commentService.Bed(comment, num, type);
+        commentService.getBed(comment, num, type);
         System.out.println("끝");
         return "redirect:/user/board/view/{num}/{type}/";
     }
@@ -170,37 +170,37 @@ public class BoardController {
 
     //글 게시판 관리 A ~ F 항목
     @GetMapping("/user/A1400")
-    public String A1400(Model model, @PageableDefault Pageable pageable) {
+    public String a1400(Model model, @PageableDefault Pageable pageable) {
         String type = "A1400";
-        Page<BoardEntity> boardDtoPage = boardService.GetBoardList(pageable, type);
-        model.addAttribute("list", boardService.GetBoardList(pageable, type));
+        Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
+        model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
         return "/boardlist/board";
     }
 
     @GetMapping("/user/A1401")
-    public String A1401(Model model, @PageableDefault Pageable pageable) {
+    public String b1401(Model model, @PageableDefault Pageable pageable) {
         String type = "A1401";
-        Page<BoardEntity> boardDtoPage = boardService.GetBoardList(pageable, type);
-        model.addAttribute("list", boardService.GetBoardList(pageable, type));
+        Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
+        model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
         return "/boardlist/board";
 
     }
 
     @GetMapping("/user/A1402")
-    public String A1402(Model model, @PageableDefault Pageable pageable) {
+    public String a1402(Model model, @PageableDefault Pageable pageable) {
         String type = "A1402";
-        Page<BoardEntity> boardDtoPage = boardService.GetBoardList(pageable, type);
-        model.addAttribute("list", boardService.GetBoardList(pageable, type));
+        Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
+        model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
         return "/boardlist/board";
     }
     @GetMapping("/user/A1403")
-    public String A1403(Model model, @PageableDefault Pageable pageable) {
+    public String a1403(Model model, @PageableDefault Pageable pageable) {
         String type = "A1403";
-        Page<BoardEntity> boardDtoPage = boardService.GetBoardList(pageable, type);
-        model.addAttribute("list", boardService.GetBoardList(pageable, type));
+        Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
+        model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
         return "/boardlist/board";
     }

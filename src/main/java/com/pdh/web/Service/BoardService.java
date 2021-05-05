@@ -24,7 +24,7 @@ public class BoardService {
 
     /*글 쓰기 */
     @Transactional
-    public String Write(BoardDto boardDto)
+    public String getWrite(BoardDto boardDto)
     {
 
         boardDto.setBad(0);
@@ -35,33 +35,33 @@ public class BoardService {
     }
     /*게시글 리스트 조회*/
     @Transactional
-    public Page<BoardEntity>  GetBoardList(Pageable pageable , String type)
+    public Page<BoardEntity>  getBoardList(Pageable pageable , String type)
     {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,10,Sort.by(Sort.Direction.DESC, "num"));
 
-        Specification<BoardEntity> spec = Specification.where(SpecsConfig.TypeSearech(type));
+        Specification<BoardEntity> spec = Specification.where(SpecsConfig.getTypeSearech(type));
 
         return boardRepository.findAll((spec),pageable);
 
     }
     /*검색 조회*/
     @Transactional
-    public Page<BoardEntity>  GetBoardSearchList(Pageable pageable , String serach , String type)
+    public Page<BoardEntity>  getBoardSearchList(Pageable pageable , String serach , String type)
     {
         String search = serach;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,10);
 
-        Specification<BoardEntity> spec = Specification.where(SpecsConfig.TitleSearech(search));
-        spec = spec.and(SpecsConfig.TypeSearech(type));
+        Specification<BoardEntity> spec = Specification.where(SpecsConfig.getTitleSearech(search));
+        spec = spec.and(SpecsConfig.getTypeSearech(type));
 
         return boardRepository.findAll((spec), pageable);
 
     }
     /*글 보기 조회 */
     @Transactional
-    public BoardDto View(int num , String type){
+    public BoardDto getView(int num , String type){
 
         Optional<BoardEntity> WrapboardEntity = boardRepository.findByNumAndType(num,type);
         BoardEntity boardEntity = WrapboardEntity.get();
@@ -71,14 +71,14 @@ public class BoardService {
 
     /*글 수정 */
     @Transactional
-    public BoardDto Update(BoardDto boardDto)
+    public BoardDto getUpdate(BoardDto boardDto)
     {
         boardRepository.save(boardDto.toEntity());
         return boardDto;
     }
     /*글 삭제*/
     @Transactional
-    public void Delete(BoardDto boardDto)
+    public void getDelete(BoardDto boardDto)
     {
         boardRepository.deleteById(boardDto.getNum());
 

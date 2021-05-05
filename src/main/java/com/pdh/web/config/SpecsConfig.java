@@ -19,7 +19,7 @@ public class SpecsConfig {
 
 
     /*제목 항목 조회*/
-    public static Specification<BoardEntity> TitleSearech(final String keyword) {
+    public static Specification<BoardEntity> getTitleSearech(final String keyword) {
 
         return new Specification<BoardEntity>() {
             @Override
@@ -30,7 +30,7 @@ public class SpecsConfig {
         };
     }
     /*글 종류 조회*/
-    public static Specification<BoardEntity> TypeSearech(final String keyword) {
+    public static Specification<BoardEntity> getTypeSearech(final String keyword) {
 
         return new Specification<BoardEntity>() {
             @Override
@@ -42,7 +42,7 @@ public class SpecsConfig {
     }
 
     /*글 번호 조회 */
-    public static Specification<CommentEntity> BoardNumSearech(final String keyword) {
+    public static Specification<CommentEntity> getBoardNumSearech(final String keyword) {
 
         return new Specification<CommentEntity>() {
             @Override
