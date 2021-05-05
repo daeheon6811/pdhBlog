@@ -18,12 +18,12 @@ public class MemberController {
     // 메인 페이지
     @GetMapping("/")
     public String index() {
-        return "";
+        return "/main/resources";
     }
     // 회원가입 페이지
     @GetMapping("/user/register")
     public String dispSignup() {
-        return "/fragement/";
+        return "/register";
     }
 
 
