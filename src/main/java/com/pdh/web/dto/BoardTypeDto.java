@@ -1,10 +1,9 @@
-package com.pdh.web.Dto;
+package com.pdh.web.dto;
 
-import com.pdh.web.entity.BoardEntity;
 import com.pdh.web.entity.BoardTypeEntity;
 import lombok.*;
 
-//게시판 Type Dto
+//게시판 Type dto
 
 @Getter
 @Setter

@@ -1,5 +1,5 @@
-package com.pdh.web.Service;
-import com.pdh.web.Dto.BoardDto;
+package com.pdh.web.service;
+import com.pdh.web.dto.BoardDto;
 import com.pdh.web.config.SpecsConfig;
 import com.pdh.web.entity.BoardEntity;
 import com.pdh.web.repository.BoardRepository;

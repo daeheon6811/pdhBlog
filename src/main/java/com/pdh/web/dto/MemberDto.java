@@ -1,11 +1,11 @@
-package com.pdh.web.Dto;
+package com.pdh.web.dto;
 
 import com.pdh.web.entity.MemberEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-// 유저 정보 Dto
+// 유저 정보 dto
 
 @Getter
 @Setter

@@ -1,13 +1,11 @@
 package com.pdh.web.entity;
 
-import com.pdh.web.Dto.CommentDto;
+import com.pdh.web.dto.CommentDto;
 
-import com.pdh.web.Key.CommentEntityId;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

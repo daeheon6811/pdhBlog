@@ -1,11 +1,10 @@
-package com.pdh.web.Service;
+package com.pdh.web.service;
 
-import com.pdh.web.Dto.MemberDto;
+import com.pdh.web.dto.MemberDto;
 import com.pdh.web.domain.Role;
 import com.pdh.web.entity.MemberEntity;
 import com.pdh.web.repository.MemberRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

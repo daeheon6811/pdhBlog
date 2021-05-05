@@ -1,11 +1,11 @@
-package com.pdh.web.Dto;
+package com.pdh.web.dto;
 
 import com.pdh.web.entity.CommentEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-// 댓글 Dto
+// 댓글 dto
 
 @Getter
 @Setter

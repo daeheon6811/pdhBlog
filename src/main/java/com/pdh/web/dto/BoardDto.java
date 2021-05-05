@@ -1,13 +1,8 @@
-package com.pdh.web.Dto;
+package com.pdh.web.dto;
 
 import com.pdh.web.entity.BoardEntity;
-import com.pdh.web.entity.MemberEntity;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 

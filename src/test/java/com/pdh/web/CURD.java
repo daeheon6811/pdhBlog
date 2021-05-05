@@ -1,8 +1,7 @@
 package com.pdh.web;
 
-import com.pdh.web.Dto.BoardDto;
-import com.pdh.web.Service.BoardService;
-import com.pdh.web.entity.BoardEntity;
+import com.pdh.web.dto.BoardDto;
+import com.pdh.web.service.BoardService;
 import com.pdh.web.repository.BoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

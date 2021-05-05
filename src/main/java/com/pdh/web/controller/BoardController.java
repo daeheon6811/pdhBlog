@@ -1,10 +1,10 @@
-package com.pdh.web.Controller;
+package com.pdh.web.controller;
 
-import com.pdh.web.Dto.BoardDto;
-import com.pdh.web.Dto.CommentDto;
-import com.pdh.web.Key.CommentEntityId;
-import com.pdh.web.Service.BoardService;
-import com.pdh.web.Service.CommentService;
+import com.pdh.web.dto.BoardDto;
+import com.pdh.web.dto.CommentDto;
+import com.pdh.web.key.CommentEntityId;
+import com.pdh.web.service.BoardService;
+import com.pdh.web.service.CommentService;
 import com.pdh.web.entity.BoardEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,7 +32,7 @@ public class BoardController {
     @GetMapping("/user/write/{type}")
     public String write(@PathVariable("type") String type, Model model) {
         model.addAttribute("type", type);
-        return "boardlist/write";
+        return "/boardlist/write";
     }
 
     //검색하기

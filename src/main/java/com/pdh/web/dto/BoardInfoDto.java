@@ -1,10 +1,7 @@
-package com.pdh.web.Dto;
+package com.pdh.web.dto;
 
 import com.pdh.web.entity.BoardInfoEntity;
-import com.pdh.web.entity.BoardTypeEntity;
 import lombok.*;
-
-import javax.persistence.Column;
 
 // 게시판 정보 DTO
 

@@ -1,7 +1,7 @@
-package com.pdh.web.Controller;
+package com.pdh.web.controller;
 
-import com.pdh.web.Dto.MemberDto;
-import com.pdh.web.Service.MemberService;
+import com.pdh.web.dto.MemberDto;
+import com.pdh.web.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -18,12 +18,12 @@ public class MemberController {
     // 메인 페이지
     @GetMapping("/")
     public String index() {
-        return "/login";
+        return "";
     }
     // 회원가입 페이지
     @GetMapping("/user/register")
     public String dispSignup() {
-        return "/register";
+        return "/fragement/";
     }
 
 

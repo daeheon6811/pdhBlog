@@ -1,6 +1,6 @@
 package com.pdh.web.entity;
 
-import com.pdh.web.Dto.BoardDto;
+import com.pdh.web.dto.BoardDto;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
