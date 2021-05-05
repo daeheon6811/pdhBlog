@@ -32,7 +32,7 @@ public class BoardController {
     @GetMapping("/user/write/{type}")
     public String write(@PathVariable("type") String type, Model model) {
         model.addAttribute("type", type);
-        return "/boardlist/write";
+        return "/boardscreen/write";
     }
 
     //검색하기
@@ -46,7 +46,7 @@ public class BoardController {
         model.addAttribute("search_value", search_value);
         model.addAttribute("type", type);
         model.addAttribute("list", boardService.getBoardSearchList(pageable, search_value, type));
-        return "/boardlist/board";
+        return "/boardscreen/board";
     }
 
     // 자유게시판 이동
@@ -56,7 +56,7 @@ public class BoardController {
         Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
         model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", "freeboard");
-        return "/boardlist/board";
+        return "/boardscreen/board";
     }
 
     //글을 쓰고 난후
@@ -83,7 +83,7 @@ public class BoardController {
         model.addAttribute("commendlist", commentService.getCommendList(pageable, num));
         model.addAttribute("commendcount", commentService.getReplyCount(num, type));
 
-        return "/boardlist/boardview";
+        return "/boardscreen/boardview";
     }
 
     // 글 수정
@@ -98,7 +98,7 @@ public class BoardController {
         boardDto.setType(type);
         boardDto.setNum(num);
         model.addAttribute("boardDto", boardDto);
-        return "/boardlist/boardupdate";
+        return "/boardscreen/boardupdate";
     }
 
     // 글 수정 결과
@@ -175,7 +175,7 @@ public class BoardController {
         Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
         model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
-        return "/boardlist/board";
+        return "/boardscreen/board";
     }
 
     @GetMapping("/user/A1401")
@@ -184,7 +184,7 @@ public class BoardController {
         Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
         model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
-        return "/boardlist/board";
+        return "/boardscreen/board";
 
     }
 
@@ -194,7 +194,7 @@ public class BoardController {
         Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
         model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
-        return "/boardlist/board";
+        return "/boardscreen/board";
     }
     @GetMapping("/user/A1403")
     public String a1403(Model model, @PageableDefault Pageable pageable) {
@@ -202,7 +202,7 @@ public class BoardController {
         Page<BoardEntity> boardDtoPage = boardService.getBoardList(pageable, type);
         model.addAttribute("list", boardService.getBoardList(pageable, type));
         model.addAttribute("type", type);
-        return "/boardlist/board";
+        return "/boardscreen/board";
     }
 
 }

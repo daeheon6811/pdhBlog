@@ -18,12 +18,12 @@ public class MemberController {
     // 메인 페이지
     @GetMapping("/")
     public String index() {
-        return "/main/resources";
+        return "loginscreen/login";
     }
     // 회원가입 페이지
     @GetMapping("/user/register")
     public String dispSignup() {
-        return "/register";
+        return "loginscreen/register";
     }
 
 
@@ -34,14 +34,14 @@ public class MemberController {
          String result = memberService.getJoinUser(memberDto);
          if(result.equals("존재"))
          {
-             return "/register";
+             return "loginscreen/register";
          }else{
-             return "/login";
+             return "loginscreen/login";
          }
     }
     @GetMapping("/user/forgot-password")
     public String  forgotPassword() {
-        return "/forgot-password";
+        return "/loginscreen/forgot-password";
     }
 
 
@@ -51,14 +51,14 @@ public class MemberController {
 
         String result = memberService.getSearchEmail(memberDto);
         if (result.equals("이메일성공")) {
-            return "/rename-password";
+            return "loginscreen/rename-password";
         } else {
-            return "/login";
+            return "loginscreen/login";
         }
     }
     @GetMapping("/user/rename-password")
     public String  renamePassword() {
-        return "/rename-password";
+        return "/loginscreen/rename-password";
     }
 
 
@@ -70,7 +70,7 @@ public class MemberController {
 
         memberDto.setEmail(email);
        memberService.getRenamePassword(memberDto);
-            return "/login";
+            return "loginscreen/login";
 
     }
     // 로그인 결과 페이지
@@ -79,7 +79,7 @@ public class MemberController {
     @AuthenticationPrincipal MemberDto atpmemberDto , Model model) {
      //    String result = memberService.CheckPassword(memberDto);
       //  int result = memberService.CheckPassword(atpmemberDto);
-        return "/login";
+        return "loginscreen/login";
 
     }
 
@@ -87,7 +87,7 @@ public class MemberController {
     @RequestMapping(value ="/user/login/result")
     public String login(@ModelAttribute MemberDto memberDto,
                               @AuthenticationPrincipal MemberDto atpmemberDto , Model model) {
-             return "/boardlist/index";
+             return "boardscreen/index";
 
     }
 
@@ -97,7 +97,7 @@ public class MemberController {
         MemberDto memberDto = memberService.getMyInformation(user);
         model.addAttribute("memberDto",memberDto);
 
-        return "/boardlist/myinfo";
+        return "boardscreen/myinfo";
 
     }
 
@@ -121,7 +121,7 @@ public class MemberController {
     // 로그인 결과 페이지
     @RequestMapping(value = "/user/logout/result" )
     public String logout() {
-        return "/login";
+        return "loginscreen/login";
 
     }
 
