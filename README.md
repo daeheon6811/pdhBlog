@@ -1,6 +1,7 @@
-개인 블로그 프로젝트 입니다.
+개인 기술 블로그 웹
 
-Spring Boot , Spring Security , JPA + Hiborate , Mybatis(혼합 예정) , Boostarp5 , thymeleaf 로 구성한 프로젝트입니다.
+
+Spring Boot , Spring Security , JPA + Hiborate , Mybatis(혼합 예정) , Boostarp5 , thymeleaf 
 
 
 회원 가입 (구현)
@@ -8,7 +9,6 @@ Spring Boot , Spring Security , JPA + Hiborate , Mybatis(혼합 예정) , Boosta
 로그인 (구현)
 
 비밀번호 찾기 (미구현)
-
 
 내 정보 변경 (구현)
 
