@@ -1,6 +1,7 @@
 package com.pdh.web.service;
 import com.pdh.web.dto.BoardDto;
 import com.pdh.web.config.SpecsConfig;
+import com.pdh.web.dto.BoardTypeDto;
 import com.pdh.web.entity.BoardEntity;
 import com.pdh.web.repository.BoardRepository;
 import lombok.AllArgsConstructor;
@@ -40,11 +41,18 @@ public class BoardService {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,10,Sort.by(Sort.Direction.DESC, "num"));
 
+
         Specification<BoardEntity> spec = Specification.where(SpecsConfig.getTypeSearech(type));
 
         return boardRepository.findAll((spec),pageable);
 
     }
+    @Transactional
+    public String getBoardType(){
+
+        return null;
+    }
+
     /*검색 조회*/
     @Transactional
     public Page<BoardEntity>  getBoardSearchList(Pageable pageable , String serach , String type)

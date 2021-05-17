@@ -18,13 +18,13 @@ public class BoardInfoEntity {
     @Column(name = "EMAIL")
     String email;
 
-    @Column(name = "POST")
+    @Column(name = "MYPOST")
     int post;
 
-    @Column(name = "LIKE")
+    @Column(name = "MYLIKES")
     int like;
 
-    @Column(name = "SHARE")
+    @Column(name = "MYSHARE")
     int share;
 
 

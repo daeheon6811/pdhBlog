@@ -205,4 +205,6 @@ public class BoardController {
         return "/boardscreen/board";
     }
 
+
+
 }

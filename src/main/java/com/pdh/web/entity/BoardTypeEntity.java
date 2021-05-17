@@ -16,15 +16,15 @@ public class BoardTypeEntity {
 
     @Id
     @Column(name ="TYPE_CM")
-    String type_cm;
+    String boardtypecm;
 
     @Column(name ="TYPE_NM")
-    String type_nm;
+    String boardtypenm;
 
 
     @Builder
-    public BoardTypeEntity(String type_cm, String type_nm) {
-        this.type_cm = type_cm;
-        this.type_nm = type_nm;
+    public BoardTypeEntity(String boardtypecm, String boardtypenm) {
+        this.boardtypecm = boardtypecm;
+        this.boardtypenm = boardtypenm;
     }
 }

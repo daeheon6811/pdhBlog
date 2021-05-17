@@ -28,11 +28,8 @@ public class MemberService implements UserDetailsService {
     /*회원 가입 */
     @Transactional
     public String getJoinUser(MemberDto memberDto) {
-
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
-
-
-        if (userEntityWrapper.isEmpty()) {
+        if (userEntityWrapper.isPresent()) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
             //System.out.println(memberDto.toEntity().getBoardcount();
@@ -47,7 +44,7 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public String getSearchEmail(MemberDto memberDto) {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
-        if (userEntityWrapper.isEmpty()) {
+        if (userEntityWrapper.isPresent()) {
             return "존재";
         } else {
             return "이메일성공";
@@ -57,7 +54,6 @@ public class MemberService implements UserDetailsService {
     /*패스워드 새로 생성*/
     @Transactional
     public void getRenamePassword(MemberDto memberDto) {
-
             Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
@@ -67,10 +63,7 @@ public class MemberService implements UserDetailsService {
     /*유저 업데이트*/
     @Transactional
     public MemberDto getUpdateUser(MemberDto memberDto) {
-
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(memberDto.getEmail());
-
-
         memberRepository.save(memberDto.toEntity());
         return memberDto;
     }
@@ -125,7 +118,7 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String Id) throws UsernameNotFoundException {
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(Id);
-        if (userEntityWrapper.isEmpty()) {
+        if (userEntityWrapper.isPresent()) {
             System.out.println("유저 정보가 존재 하지 X");
             throw new UsernameNotFoundException(Id);
         }

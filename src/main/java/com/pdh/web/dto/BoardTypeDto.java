@@ -11,20 +11,22 @@ import lombok.*;
 @NoArgsConstructor
 public class BoardTypeDto {
 
-    String type_cm;
-    String type_nm;
+    String boardtypecm;
+    String boardtypenm;
+
+    ;
 
 
     public BoardTypeEntity toEntity(){
         return BoardTypeEntity.builder()
-                .type_cm(type_cm)
-                .type_nm(type_nm)
+                .boardtypecm(boardtypecm)
+                .boardtypenm(boardtypenm)
                 .build();
     }
 
     @Builder
-    public BoardTypeDto(String type_cm, String type_nm) {
-        this.type_cm = type_cm;
-        this.type_nm = type_nm;
+    public BoardTypeDto(String boardtypecm, String boardtypenm) {
+        this.boardtypecm = boardtypecm;
+        this.boardtypenm = boardtypenm;
     }
 }
